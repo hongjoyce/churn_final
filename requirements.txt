@@ -1,5 +1,9 @@
-matplotlib==3.5.3
-numpy==1.22.3
-pandas==1.4.4
-shap==0.41.0
+scikit-learn==1.2.0
 streamlit==1.16.0
+threadpoolctl==2.2.0
+IPython==7.31.1
+matplotlib==3.5.3
+shap==0.41.0
+xgboost==1.7.0
+numpy==1.22.3
+
