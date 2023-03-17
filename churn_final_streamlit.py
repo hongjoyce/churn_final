@@ -90,9 +90,9 @@ if st.button('Predict Churn'):
         CityTier = 3
     
         
-    query = np.array(['Tenure', 'TotalCashback', 'Complain', 'WarehouseToHome', \
-                      'DaySinceLastOrder', 'NumberOfAddress', 'score', \
-                          'PreferedOrderCat_Mobile', 'CouponUsed', 'CityTier'], dtype=object)
+    query = np.array([Tenure, TotalCashback, Complain, WarehouseToHome, \
+                      DaySinceLastOrder, NumberOfAddress, score, \
+                      PreferedOrderCat_Mobile, CouponUsed, CityTier], dtype=object)
     
 
     query = query.reshape(1, 10)
@@ -104,13 +104,13 @@ if st.button('Predict Churn'):
     shap.initjs()
 
     #set the tree explainer as the model of the pipeline
-    explainer = shap.TreeExplainer(model, df, model_output="probability")
+    explainer = shap.TreeExplainer(model['xgb'], df, model_output="probability")
 
     #get Shap values from preprocessed data
-    shap_values = explainer.shap_values(query)
+    shap_value = explainer.shap_values(query)
 
     #plot the feature importance
-    fig = shap.force_plot(explainer.expected_value, shap_values, query, matplotlib=True,show=False, \
+    fig = shap.force_plot(explainer.expected_value, shap_value, query, matplotlib=True,show=False, \
                           feature_names=['Tenure', 'TotalCashback', 'Complain', 'WarehouseToHome', \
                                             'DaySinceLastOrder', 'NumberOfAddress', 'SatisfactionScore', \
                                                 'PreferedOrderCat_Mobile', 'CouponUsed', 'CityTier'])
